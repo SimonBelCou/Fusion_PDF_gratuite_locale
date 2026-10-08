@@ -17,7 +17,8 @@ La bibliothèque [pdf-lib](https://pdf-lib.js.org/) 1.17.1 (licence MIT) est int
 ## Choix de sécurité
 
 - Les noms de fichiers sont affichés avec `textContent` (jamais en HTML), ce qui évite toute injection.
-- Aucune donnée n'est envoyée sur le réseau et rien n'est stocké.
+- Aucune donnée n'est envoyée sur le réseau et rien n'est stocké. Une règle CSP (balise `meta`) l'impose au navigateur : `connect-src 'none'` interdit tout envoi, `default-src 'none'` bloque tout le reste, seules les polices Google sont autorisées au chargement.
+- La CSP autorise `'unsafe-inline'` pour le script et le style, parce que tout le code est dans le fichier HTML. À durcir (nonce ou fichiers séparés) si le JavaScript est un jour déplacé hors du fichier.
 - Les PDF protégés par mot de passe ou illisibles sont signalés et ignorés.
 
 Les règles de développement du projet sont décrites dans `CLAUDE.md`.
